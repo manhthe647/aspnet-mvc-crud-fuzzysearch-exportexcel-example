@@ -11694,11 +11694,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\#CODE\\QuanLySinhVien\\QuanLySinhVien.WebAppMvc\\QuanLySinhVien.WebAppMvc.csproj",
+      "projectUniqueName": "E:\\#CODE\\QLSV\\QuanLySinhVien.WebAppMvc.csproj",
       "projectName": "QuanLySinhVien.WebAppMvc",
-      "projectPath": "E:\\#CODE\\QuanLySinhVien\\QuanLySinhVien.WebAppMvc\\QuanLySinhVien.WebAppMvc.csproj",
+      "projectPath": "E:\\#CODE\\QLSV\\QuanLySinhVien.WebAppMvc.csproj",
       "packagesPath": "D:\\NuGetPackages",
-      "outputPath": "E:\\#CODE\\QuanLySinhVien\\QuanLySinhVien.WebAppMvc\\obj\\",
+      "outputPath": "E:\\#CODE\\QLSV\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Manht\\AppData\\Roaming\\NuGet\\NuGet.Config",

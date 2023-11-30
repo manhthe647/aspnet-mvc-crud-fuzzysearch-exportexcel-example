@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "sLz1IJ+gnqZg4YpF+rFAgw+Q+pE07/+9e+DMx5yQPbmYujOAX6ZPW8DeWIXOZGFpYX+roTgZ6ExuIxtEI6HiKQ==",
+  "dgSpecHash": "sgmbxW6ACWvEd4sk45YSi6JtCflirFLvESJpMc+SVk6CD7wYSXUr5V/o3BNDNRWtPy/cOJeXkmPYAhJ1faehjQ==",
   "success": true,
-  "projectFilePath": "E:\\#CODE\\QuanLySinhVien\\QuanLySinhVien.WebAppMvc\\QuanLySinhVien.WebAppMvc.csproj",
+  "projectFilePath": "E:\\#CODE\\QLSV\\QuanLySinhVien.WebAppMvc.csproj",
   "expectedPackageFiles": [
     "D:\\NuGetPackages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "D:\\NuGetPackages\\automapper.extensions.microsoft.dependencyinjection\\7.0.0\\automapper.extensions.microsoft.dependencyinjection.7.0.0.nupkg.sha512",
