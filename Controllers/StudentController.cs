@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLySinhVien.WebAppMvc.Models;
 using QuanLySinhVien.WebAppMvc.ViewModel;
@@ -9,20 +10,25 @@ namespace QuanLySinhVien.WebAppMvc.Controllers
     public class StudentController: BaseController
     {
         private readonly AppDbContext _dbContext;
-        public StudentController(AppDbContext dbContext)
+        private readonly IMapper _mapper;
+
+        public StudentController(AppDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
+
+
         }
 
         public IActionResult Index()
         {
+            var sessions = HttpContext.Session.GetString("Token");
             // Lấy danh sách giảng viên từ cơ sở dữ liệu
             var professors = _dbContext.Professors.ToList();
 
             // Gán danh sách giảng viên vào ViewBag
             ViewBag.Professors = professors;
 
-            var sessions = HttpContext.Session.GetString("Token");
             var query = from s in _dbContext.Students
                         join p in _dbContext.Professors on s.AdvisorId equals p.ProfessorId
                         select new StudentProfessorVm
@@ -43,17 +49,10 @@ namespace QuanLySinhVien.WebAppMvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                var student= new Student()
-                {
-                    FirstName = vm.FirstName,
-                    LastName = vm.LastName,
-                    Dob= vm.Dob,
-                    GPA= vm. GPA,
-                    AdvisorId= vm.AdvisorId,
-                };
+                var student = _mapper.Map<StudentVm, Student>(vm);
+                _dbContext.Students.Add(student);
+                _dbContext.SaveChanges();
 
-                var addStudent = _dbContext.Students.Add(student);
-                 _dbContext.SaveChanges();
 
             }
             else
@@ -73,14 +72,11 @@ namespace QuanLySinhVien.WebAppMvc.Controllers
                 var student = _dbContext.Students.SingleOrDefault(s => s.StudentId == vm.StudentId);
                 if(student != null) { 
 
-                 student.FirstName = vm.FirstName; 
-                 student.LastName = vm.LastName;
-                  student.Dob = vm.Dob;
-                    student.GPA = vm.GPA;
-                    student.AdvisorId = vm.AdvisorId;
-
+                _mapper.Map<StudentVm, Student>(vm, student);
 
                 }
+
+
                 _dbContext.Update(student);
                 _dbContext.SaveChanges();
            

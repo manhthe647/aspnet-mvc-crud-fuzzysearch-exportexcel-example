@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using QuanLySinhVien.WebAppMvc.Models;
 using QuanLySinhVien.WebAppMvc.ViewModel;
 
@@ -8,9 +9,12 @@ namespace QuanLySinhVien.WebAppMvc.Controllers
     {
 
         private readonly AppDbContext _dbContext;
-        public CourseController(AppDbContext dbContext)
+
+        private readonly IMapper _mapper;
+        public CourseController(AppDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+             _mapper = mapper;
         }
 
         public IActionResult Index()
@@ -40,15 +44,16 @@ namespace QuanLySinhVien.WebAppMvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                var course = new Course()
-                {
-                    CourseName = vm.CourseName,
-                    Credits = vm.Credits,
-                    ProfessorId = vm.ProfessorId,
+                //var course = new Course()
+                //{
+                //    CourseName = vm.CourseName,
+                //    Credits = vm.Credits,
+                //    ProfessorId = vm.ProfessorId,
                    
-                };
+                //};
 
-                var addcourse = _dbContext.Courses.Add(course);
+               var course= _mapper.Map<CourseVm, Course>(vm);
+                _dbContext.Courses.Add(course);
                 _dbContext.SaveChanges();
 
             }
@@ -69,10 +74,11 @@ namespace QuanLySinhVien.WebAppMvc.Controllers
                 var course = _dbContext.Courses.SingleOrDefault(s => s.CourseId == vm.CourseId);
                 if (course != null)
                 {
+                    _mapper.Map<CourseVm, Course>(vm, course);
 
-                    course.CourseName = vm.CourseName;
-                    course.Credits = vm.Credits;
-                    course.ProfessorId = vm.ProfessorId;
+                    //course.CourseName = vm.CourseName;
+                    //course.Credits = vm.Credits;
+                    //course.ProfessorId = vm.ProfessorId;
 
 
                 }

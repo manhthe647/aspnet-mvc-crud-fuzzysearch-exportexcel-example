@@ -559,3 +559,5 @@ E:\#CODE\QuanLySinhVien\QuanLySinhVien.WebAppMvc\bin\Debug\net6.0\runtimes\win-x
 E:\#CODE\QuanLySinhVien\QuanLySinhVien.WebAppMvc\bin\Debug\net6.0\runtimes\win-x64\native\k5sprt64.dll
 E:\#CODE\QuanLySinhVien\QuanLySinhVien.WebAppMvc\bin\Debug\net6.0\runtimes\win-x64\native\krb5_64.dll
 E:\#CODE\QuanLySinhVien\QuanLySinhVien.WebAppMvc\bin\Debug\net6.0\runtimes\win-x64\native\krbcc64.dll
+E:\#CODE\QuanLySinhVien\QuanLySinhVien.WebAppMvc\bin\Debug\net6.0\AutoMapper.dll
+E:\#CODE\QuanLySinhVien\QuanLySinhVien.WebAppMvc\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

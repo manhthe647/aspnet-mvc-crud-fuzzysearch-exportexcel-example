@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using QuanLySinhVien.WebAppMvc.Models;
 using QuanLySinhVien.WebAppMvc.ViewModel;
 
@@ -9,25 +10,33 @@ namespace QuanLySinhVien.WebAppMvc.Controllers
 
 
         private readonly AppDbContext _dbContext;
-        public ProfessorController(AppDbContext dbContext)
+        private readonly IMapper _mapper;
+        public ProfessorController(AppDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
+
         }
 
         public IActionResult Index()
         {
             var sessions = HttpContext.Session.GetString("Token");
-            var professors = _dbContext.Professors.ToList();
 
-            var professorVms = professors.Select(p => new ProfessorVm
-            {
-                ProfessorId = p.ProfessorId,
-                FirstName = p.FirstName,
-                LastName = p.LastName,
-                Department = p.Department,
-            }).ToList();
+             var result = _mapper.ProjectTo<ProfessorVm>(
+                _dbContext.Professors).ToList();
 
-            return View(professorVms);
+            //var professors = _dbContext.Professors.ToList();
+
+            //var professorVms = professors.Select(p => new ProfessorVm
+            //{
+            //    ProfessorId = p.ProfessorId,
+            //    FirstName = p.FirstName,
+            //    LastName = p.LastName,
+            //    Department = p.Department,
+            //}).ToList();
+
+        
+            return View(result);
         }
 
 
@@ -36,14 +45,16 @@ namespace QuanLySinhVien.WebAppMvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                var professor = new Professor()
-                {
-                    FirstName = vm.FirstName,
-                    LastName = vm.LastName,
-                    Department = vm.Department,
-                };
+                //var professor = new Professor()
+                //{
+                //    FirstName = vm.FirstName,
+                //    LastName = vm.LastName,
+                //    Department = vm.Department,
+                //};
 
-                var addprofessor = _dbContext.Professors.Add(professor);
+                //var addprofessor = _dbContext.Professors.Add(professor);
+                var professor = _mapper.Map<ProfessorVm, Professor>(vm);
+                _dbContext.Professors.Add(professor);
                 _dbContext.SaveChanges();
 
             }
@@ -65,10 +76,11 @@ namespace QuanLySinhVien.WebAppMvc.Controllers
                 if (professor != null)
                 {
 
-                    professor.FirstName = vm.FirstName;
-                    professor.LastName = vm.LastName;
-                    
-                    professor.Department = vm.Department;
+                    //professor.FirstName = vm.FirstName;
+                    //professor.LastName = vm.LastName;
+
+                    //professor.Department = vm.Department;
+                    _mapper.Map<ProfessorVm, Professor>(vm, professor);
 
 
                 }
