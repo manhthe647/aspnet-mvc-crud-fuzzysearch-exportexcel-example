@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "++kh+Fma9aWus0FCEio/TaDnqFA2iutg6xS07nCEHL6/a7euC0LvoiIBip+Vz60E/y8EtutOCyaCR1C17x4jBw==",
+  "dgSpecHash": "otjbm0K7DdpdwH88itNurE0KRoWlM+T2kbpV+ODBgl6QxPQP/Xb0f8y8WsSePRXYxN0QrnJOrsHWb8sUpt6aew==",
   "success": true,
-  "projectFilePath": "E:\\#CODE\\QuanLySinhVien\\QuanLySinhVien.WebAppMvc\\QuanLySinhVien.WebAppMvc.csproj",
+  "projectFilePath": "E:\\#CODE\\QLSV\\QuanLySinhVien.WebAppMvc.csproj",
   "expectedPackageFiles": [
     "D:\\NuGetPackages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "D:\\NuGetPackages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
