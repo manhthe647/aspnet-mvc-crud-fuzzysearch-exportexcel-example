@@ -1,0 +1,206 @@
+﻿@using QuanLySinhVien.WebAppMvc.Models;
+@model List<QuanLySinhVien.WebAppMvc.ViewModel.CourseProfessorVm>;
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<body>
+    <div class="box-content p-2" style="margin-top: 80px">
+
+        <div class="d-flex justify-content-between mt-2">
+            <h2>Danh sách môn học</h2>
+            <button class="addBtn btn btn-primary" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myAddModal" onclick="clearTextBox();">Thêm môn học</button>
+
+        </div>
+        @if (Model != null)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Tên môn học
+                        </th>
+                      
+                        <th>
+                            Số tín chỉ
+                        </th>
+                        <th>Giảng viên phụ trách</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Courses.CourseName</td>
+                            <td>@item.Courses.Credits</td>
+                            <td>@item.ProfessorName</td>
+                            <th>
+                                <button class="btn btn-info" data-id="@item.Courses.CourseId"
+                                        onclick="getData('@item.Courses.CourseId','@item.Courses.CourseName', '@item.Courses.Credits', '@item.Courses.ProfessorId')"
+                                        data-toggle="modal" data-target="#myEditModal">
+                                    Sửa
+                                </button>
+                                <button class="btn btn-secondary" data-id="@item.Courses.CourseId" onclick="deleteItem(this)" data-toggle="modal" data-target="#myRemoveModal">Xóa</button>
+                            </th>
+
+                        </tr>
+                    }
+
+
+                </tbody>
+
+            </table>
+
+        }
+        else
+        {
+            <p>Không có dữ liệu trả về  </p>
+        }
+
+
+    </div>
+    <div class="modal fade" id="myAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form method="post" asp-action="Create" asp-controller="Course">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="FirstName">Tên môn học</label>
+                            <input type="text" class="form-control" id="FirstName" placeholder="Tên môn" name="CourseName" />
+                        </div>
+                        <div class="form-group">
+                            <label for="LastName">Tín chỉ</label>
+                            <input type="text" class="form-control" id="LastName" placeholder="Số tín" name="Credits" />
+                        </div>
+                      
+                        <div class="form-group">
+                            <label for="Professor">Giảng viên phụ trách</label>
+                            <select class="form-control" id="Professor" name="ProfessorId">
+                                <option value="">Chọn giảng viên</option>
+
+                                @{
+                                    var professors = ViewBag.Professorsc as List<Professor>;
+                                    if (professors != null)
+                                    {
+                                        foreach (var professor in professors)
+                                        {
+                                            <option value="@professor.ProfessorId">@professor.LastName @professor.FirstName</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        @*<button type="button" class="btn btn-primary" id="btnAdd" onclick="return Add();">Thêm</button>*@
+                        <button type="submit" class="btn btn-primary" id="btnAdd">Thêm</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @* Modal sửa *@
+    <div class="modal fade" id="myEditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form method="post" asp-action="Edit" asp-controller="Course">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="hidden" class="courseIdEdit form-control" id="StudentId" name="CourseId" />
+                        </div>
+                        <div class="form-group">
+                            <label for="FirstName">Tên khóa</label>
+                            <input type="text" class="courseNameEdit form-control" id="FirstName" placeholder="Tên khóa" name="CourseName" />
+                        </div>
+                        <div class="form-group">
+                            <label for="LastName">Số tín chỉ</label>
+                            <input type="number" class="creditEdit form-control" id="LastName" placeholder="Số tín chỉ" name="Credits" />
+                        </div>
+                   
+                        <div class="form-group">
+                            <label for="Professor">Giảng viên phụ trách</label>
+                            <select class="professorIdEdit form-control" id="professorEdit" name="professorId">
+                                <option value="">Chọn giảng viên</option>
+
+                                @{
+                                    var professors2 = ViewBag.Professorsc as List<Professor>;
+                                    if (professors2 != null)
+                                    {
+                                        foreach (var professor in professors2)
+                                        {
+                                            <option value="@professor.ProfessorId">@professor.LastName @professor.FirstName</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        @*<button type="button" class="btn btn-primary" id="btnAdd" onclick="return Add();">Thêm</button>*@
+                        <button type="submit" class="btn btn-primary" id="btnEdit">Sửa</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @*  Xóa*@
+    <div class="modal fade" id="myRemoveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+                <form method="post" asp-action="Delete" asp-controller="Course">
+                    <div class="modal-body">
+
+                        Xác nhận xóa ?
+
+                        <input type="hidden" class="courseIdDelete form-control" name="CourseId" />
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" id="btnRemove">Xóa</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        
+
+        function deleteItem(button) {
+            var id = $(button).data('id'); // Lấy giá trị id từ thuộc tính data-id
+            $('.courseIdDelete').val(id); // Đặt giá trị id vào input studentIdDelete
+        }
+
+        function getData(courseId, courseName, credits, professorId) {
+            $(".courseIdEdit").val(courseId);
+            $(".courseNameEdit").val(courseName);
+            $(".creditEdit").val(credits);
+
+            $(".professorIdEdit").val(professorId);
+
+
+        }
+
+
+
+    </script>
+</body>

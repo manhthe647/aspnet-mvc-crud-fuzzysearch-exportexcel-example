@@ -1,0 +1,93 @@
+﻿@using QuanLySinhVien.WebAppMvc.ViewModel;
+@model UserVm;
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng nhập</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/EShopSolution.Admin.styles.css" asp-append-version="true" />
+    <link href="~/assets/css/app.min.css" rel="stylesheet" asp-append-version="true">
+</head>
+<body>
+    <div class="app">
+        <div class="container-fluid p-h-0 p-v-20 bg full-height d-flex" style="background-image: url('assets/images/others/login-3.png')">
+            <div class="d-flex flex-column justify-content-between w-100">
+                <div class="container d-flex h-100">
+                    <div class="row align-items-center w-100">
+                        <div class="col-md-7 col-lg-5 m-h-auto">
+                            <div class="card shadow-lg">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center justify-content-between m-b-30">
+                                        <h2 class="m-b-0">Quản lý sinh viên</h2>
+                                    </div>
+                                    <form asp-action="Login" asp-controller="User" method="post">
+                                        <div asp-validation-summary="All" class="text-danger"></div>
+                                        <div class="form-group">
+                                            <label class="font-weight-semibold">Tài khoản</label>
+                                            <div class="input-affix">
+                                                <i class="prefix-icon anticon anticon-user"></i>
+                                                <input type="text" class="form-control" value="admin123"  asp-for="Username" placeholder="Username" name="Username">
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="font-weight-semibold">Mật khẩu</label>
+                                            <div class="input-affix m-b-10 position-relative">
+                                                <i class="prefix-icon anticon anticon-lock"></i>
+                                                <input type="password" class="passwordInput form-control" value="Admin@123" asp-for="PasswordHash" placeholder="Password" name="PasswordHash">
+                                                <i class="show-password position-absolute  prefix-icon anticon anticon-eye" style="left: calc(100% - 30px); font-size: 16px"></i>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="d-flex align-items-center justify-content-between">
+                                              
+                                                <button type="submit" class="btn btn-primary">Đăng nhập </button>
+                                            </div>
+                                        </div>
+                                        
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- Core Vendors JS -->
+    <script src="assets/js/vendors.min.js"></script>
+
+    <!-- page js -->
+    <script src="assets/vendors/chartjs/Chart.min.js"></script>
+    <script src="assets/js/pages/dashboard-default.js"></script>
+
+    <!-- Core JS -->
+    <script src="assets/js/app.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.show-password').click(function () {
+                var passwordInput = $('.passwordInput');
+                var currentType = passwordInput.attr('type');
+
+                if (currentType === 'password') {
+                    passwordInput.attr('type', 'text');
+                } else {
+                    passwordInput.attr('type', 'password');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

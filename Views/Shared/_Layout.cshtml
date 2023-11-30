@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/EShopSolution.Admin.styles.css" asp-append-version="true" />
+    <link href="~/assets/css/app.min.css" rel="stylesheet" asp-append-version="true">
+</head>
+<body>
+    <div cite="container-fluid">
+        <div class="app">
+            <div class="layout">
+                <partial name="_HeaderPartial" />
+
+                <partial name="_SiteNavPartial" />
+
+                <div class="page-container">
+                    <main role="main" class="pb-3">
+                        @RenderBody()
+                    </main>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- Core Vendors JS -->
+    <script src="assets/js/vendors.min.js"></script>
+
+    <!-- page js -->
+    <script src="/assets/vendors/chartjs/Chart.min.js"></script>
+    <script src="/assets/js/pages/dashboard-default.js"></script>
+
+    <!-- Core JS -->
+    <script src="/assets/js/app.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("ScriptsCkEditor", required: false)
+
+</body>
+</html>
