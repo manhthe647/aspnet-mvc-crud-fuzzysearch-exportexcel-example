@@ -12,7 +12,7 @@
 <h2>Danh sách sinh viên</h2>
 <div>
                 <button class="addBtn btn btn-primary" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myAddModal" onclick="clearTextBox();">Thêm sinh viên</button>
-            <button class="btn btn-primary" onclick="DownloadExcel()">Xuất Excel</button>
+            <button class="btn btn-primary" onclick="window.location.href='/Student/ExportExcel'">Xuất Excel</button>
 </div>
 
 </div>
@@ -23,7 +23,7 @@
         </form>
 </div>
 <form id="pageSizeForm" method="get" action="@Url.Action("Index")">
-            <label for="pageSize">Page Size:</label>
+            <label for="pageSize">Hiển thị </label>
             <select id="pageSize" name="pageSize">
                 <option value="5" selected="@(_pageSize == 5)">5</option>
                 <option value="10" selected="@(_pageSize == 10)">10</option>
@@ -32,11 +32,12 @@
 
                 <!-- Other pageSize values -->
             </select>
+            giá trị
     <!-- Các thành phần giao diện khác -->
 
 </form>
 <div>
-    <p>Total Items: @ViewBag.TotalItems - Total Pages: @ViewBag.TotalPages</p>
+    <p>Số bản ghi: @ViewBag.TotalItems - Số trang: @ViewBag.TotalPages</p>
     <p>Chọn trang</p>
         <div>
             <ul class="pagination">

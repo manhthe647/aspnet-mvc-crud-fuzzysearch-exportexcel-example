@@ -155,9 +155,39 @@ namespace QuanLySinhVien.WebAppMvc.Controllers
             return RedirectToAction("Index", "Student"); 
         }
 
+        public IActionResult ExportExcel()
+        {
+            var data = GetStudents();
+            var students = data.Select(sp => new { 
+                sp.Students.StudentId,
+                sp.Students.FirstName,
+                sp.Students.LastName,
+                sp.Students.Dob,
+                sp.Students.GPA,
 
-       
-     
+                sp.ProfessorName })
+                .ToList();
+            var stream = new MemoryStream();
+
+            using (var package = new ExcelPackage(stream))
+            {
+                var sheet = package.Workbook.Worksheets.Add("Student");
+                FormatDateOfBirthColumn(sheet, 4);
+                sheet.Cells.LoadFromCollection(students, true);
+                package.Save();
+            }
+            stream.Position = 0;
+            var fileName = $"Student_{DateTime.Now.ToString("yyyyMMddHHmmss")}.xlsx";
+            return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
+        }
+
+        private void FormatDateOfBirthColumn(ExcelWorksheet worksheet, int columnIndex)
+        {
+            var column = worksheet.Column(columnIndex);
+            column.Style.Numberformat.Format = "dd/MM/yyyy"; // Định dạng ngày tháng mong muốn, ví dụ: "yyyy-mm-dd"
+            column.Width = 12;
+        }
+
 
 
     }
