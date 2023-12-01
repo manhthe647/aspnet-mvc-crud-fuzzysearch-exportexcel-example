@@ -5,9 +5,10 @@ VisualStudioVersion = 17.6.33801.468
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuanLySinhVien.WebAppMvc", "QuanLySinhVien.WebAppMvc.csproj", "{7712F8A9-751E-4F2F-9CB5-4D3770D34DE9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL", "SQL", "{D49E21F1-4F19-4C04-A932-115D208C66CE}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Others", "Others", "{D49E21F1-4F19-4C04-A932-115D208C66CE}"
 	ProjectSection(SolutionItems) = preProject
 		QuanLySinhVien_6868.sql = QuanLySinhVien_6868.sql
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global
