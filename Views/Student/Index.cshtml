@@ -1,19 +1,61 @@
-﻿@model List<QuanLySinhVien.WebAppMvc.ViewModel.StudentProfessorVm>;
+﻿@model IEnumerable<QuanLySinhVien.WebAppMvc.ViewModel.StudentProfessorVm>;
+
 
 @{
     ViewData["Title"] = "Index";
+    int _pageSize = ViewBag.PageSize ?? 5;
 }
 
-<body>
     <div class="box-content p-2" style="margin-top: 80px">
 
 <div class="d-flex justify-content-between mt-2">
 <h2>Danh sách sinh viên</h2>
+<div>
                 <button class="addBtn btn btn-primary" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myAddModal" onclick="clearTextBox();">Thêm sinh viên</button>
+            <button class="btn btn-primary" onclick="window.location.href='/Student/ExportExcel'">Xuất Excel</button>
+</div>
 
 </div>
-        @if(Model != null)
-        {
+<div class="my-2">
+        <form method="get" action="@Url.Action("Index")">
+            <input type="text" name="searchQuery" placeholder="Tìm kiếm gần đúng" value="@ViewBag.SearchQuery" />
+            <button type="submit">Tìm kiếm</button>
+        </form>
+</div>
+<form id="pageSizeForm" method="get" action="@Url.Action("Index")">
+            <label for="pageSize">Hiển thị </label>
+            <select id="pageSize" name="pageSize">
+                <option value="5" selected="@(_pageSize == 5)">5</option>
+                <option value="10" selected="@(_pageSize == 10)">10</option>
+                <option value="20" selected="@(_pageSize == 20)">20</option>
+                <option value="50" selected="@(_pageSize == 50)">50</option>
+
+                <!-- Other pageSize values -->
+            </select>
+            giá trị
+    <!-- Các thành phần giao diện khác -->
+
+</form>
+<div>
+    <p>Số bản ghi: @ViewBag.TotalItems - Số trang: @ViewBag.TotalPages</p>
+    <p>Chọn trang</p>
+        <div>
+            <ul class="pagination">
+                <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                    <a href="@Url.Action("Index", new { page = ViewBag.CurrentPage -1  })" class="page-link rounded">Trước</a>
+                </li> 
+                @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                {
+                    <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "") ">
+                        <a href="@Url.Action("Index", new { page = i })" class="page-link rounded">@i</a>
+                    </li>
+                }
+            <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
+                    <a href="@Url.Action("Index", new { page = ViewBag.CurrentPage + 1  })" class="page-link rounded">Sau</a>
+                </li>
+            </ul>
+        </div>
+        
         <table class="table">
     <thead>
         <tr>
@@ -36,6 +78,8 @@
         </tr>
     </thead>
     <tbody>
+                @if (Model != null)
+                {
                
                 @foreach(var item in Model)
         {
@@ -57,15 +101,17 @@
                     }
                 
             
-            </tbody>
-
-            </table>
-
         }
+
         else
         {
             <p>Không có dữ liệu trả về  </p>
         }
+            </tbody>
+
+            </table>
+      
+        
 
 
     </div>
@@ -204,9 +250,14 @@
     </div>
     <script>
         // Load Data in Table when document is ready
+
+
         $(document).ready(function () {
             loadData();
         });
+
+
+      
 
         function deleteItem(button) {
             var id = $(button).data('id'); // Lấy giá trị id từ thuộc tính data-id
@@ -226,11 +277,10 @@
 
             $(".gpaEdit").val(GPA);
             $(".advisorEdit").val(AdvisorId);
-
-
         }
+
+     
 
         
 
     </script>
-</body>
