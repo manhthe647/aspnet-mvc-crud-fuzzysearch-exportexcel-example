@@ -1,5 +1,5 @@
 ﻿## Một vài chức năng cơ bản
-## CRUD - ASP.NET MVC
+## QUẢN LÝ SINH VIÊN - ASP.NET MVC
 1. Đăng nhập
 <img src="https://i.imgur.com/3oJc9SL.png">
 
