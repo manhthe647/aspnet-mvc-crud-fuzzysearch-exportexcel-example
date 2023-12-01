@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Controllers",
+    "\\Views",
+    "\\Views\\Student"
   ],
-  "SelectedNode": "\\QuanLySinhVien.WebAppMvc.sln",
+  "SelectedNode": "\\Controllers\\StudentController.cs",
   "PreviewInSolutionExplorer": false
 }
