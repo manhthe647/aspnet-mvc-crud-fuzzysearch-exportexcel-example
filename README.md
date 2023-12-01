@@ -17,6 +17,9 @@
 <img src="https://i.imgur.com/1xD8S9h.png">
 
 5.Đăng xuất
+<div>
 <img src="https://i.imgur.com/0H9oHt4.png">
+  
+</div>
 
 
